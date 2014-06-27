@@ -1499,3 +1499,50 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 linaro@linaro-ubuntu-desktop:~/cjdns/cjdns-master$$ git log | head -1
 commit 9a3db93cd3ea5b3583ecc3b741518dd0e6ec8764
+
+2014-06-26 from XaosTX: OpenWRT Data!
+~# cjdroute --bench
+1403761176 INFO RandomSeed.c:42 Attempting to seed random number generator
+1403761176 INFO RandomSeed.c:50 Trying random seed [/dev/urandom] Success
+1403761176 INFO RandomSeed.c:56 Trying random seed [sysctl(RANDOM_UUID) (Linux)] Failed
+1403761176 INFO RandomSeed.c:50 Trying random seed [/proc/sys/kernel/random/uuid (Linux)] Success
+1403761176 INFO RandomSeed.c:64 Seeding random number generator succeeded with [2] sources
+These metrics are speed of encryption and decryption similar to the usage pattern
+when decrypting a packet, switching it, and re-encrypting it with another key.
+Test sending 1000 64 byte       hello packets
+        Finished in 6363ms. 80 Kb/s
+
+Test sending 1000 1500 byte     hello packets
+        Finished in 6697ms. 1791 Kb/s
+
+Test sending 1000 64 byte       key packets
+        Finished in 5937ms. 86 Kb/s
+
+Test sending 1000 1500 byte     key packets
+        Finished in 6274ms. 1912 Kb/s
+
+Test sending 100000 64 byte     data packets
+        Finished in 5346ms. 9577 Kb/s
+
+This is the switch configuration so this indicates expected switch throughput:
+Test sending 100000 1500 byte   data packets
+        Finished in 37791ms. 31753 Kb/s
+
+~# cat /proc/cpuinfo 
+system type             : Broadcom BCM4716
+machine                 : Asus RT-N16
+processor               : 0
+cpu model               : MIPS 74Kc V4.0
+BogoMIPS                : 239.61
+wait instruction        : yes
+microsecond timers      : yes
+tlb_entries             : 64
+extra interrupt vector  : yes
+hardware watchpoint     : yes, count: 4, address/irw mask: [0x0ffc, 0x0ffc, 0x0ffb, 0x0ffb]
+isa                     : mips1 mips2 mips32r1 mips32r2
+ASEs implemented        : mips16 dsp dsp2
+shadow register sets    : 1
+kscratch registers      : 0
+core                    : 0
+VCED exceptions         : not available
+VCEI exceptions         : not available
